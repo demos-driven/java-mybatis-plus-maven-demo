@@ -10,24 +10,24 @@ import org.springframework.test.context.junit4.SpringRunner;
 import javax.annotation.Resource;
 
 /**
- * @author 邓礼桐（denglitong.dlt@alibaba-inc.com）
+ * @author 邓礼桐（deng.litong@foxmail.com）
  * @date 2021/4/3
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class SequenceTest {
 
-	@Resource
-	private EmployeeMapper employeeMapper;
+    @Resource
+    private EmployeeMapper employeeMapper;
 
-	@Test
-	void testInsert() {
-		for (int i = 0; i < 3; i++) {
-			Employee employee = new Employee();
-			employee.setName("name" + i);
-			employee.setAge(18 + i);
-			employee.setEmail("name" + i + "@foxmail.com");
-			employeeMapper.insert(employee);
-		}
-	}
+    @Test
+    void testInsert() {
+        for (int i = 0; i < 3; i++) {
+            Employee employee = new Employee();
+            employee.setName("name" + i);
+            employee.setAge(18 + i);
+            employee.setEmail("name" + i + "@foxmail.com");
+            employeeMapper.insert(employee);
+        }
+    }
 }

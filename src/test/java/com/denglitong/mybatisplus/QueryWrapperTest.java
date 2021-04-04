@@ -16,50 +16,50 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @author 邓礼桐（denglitong.dlt@alibaba-inc.com）
+ * @author 邓礼桐（deng.litong@foxmail.com）
  * @date 2021/4/3
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
 class QueryWrapperTest {
 
-	@Resource
-	private UserMapper userMapper;
+    @Resource
+    private UserMapper userMapper;
 
-	@Test
-	void testAllEq() {
-		QueryWrapper<User> queryWrapper = Wrappers.query();
-		Map<String, Object> params = new HashMap<>();
-		params.put("age", 24);
-		queryWrapper.allEq(params);
-		// where age = 24
-		List<User> userList = userMapper.selectList(queryWrapper);
-		userList.forEach(System.out::println);
+    @Test
+    void testAllEq() {
+        QueryWrapper<User> queryWrapper = Wrappers.query();
+        Map<String, Object> params = new HashMap<>();
+        params.put("age", 24);
+        queryWrapper.allEq(params);
+        // where age = 24
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
 
-		QueryWrapper<User> queryWrapper2 = Wrappers.query();
-		params.put("name", null);
-		queryWrapper2.allEq(params);
-		// where age = 24 and name is null
-		userList = userMapper.selectList(queryWrapper2);
-		userList.forEach(System.out::println);
+        QueryWrapper<User> queryWrapper2 = Wrappers.query();
+        params.put("name", null);
+        queryWrapper2.allEq(params);
+        // where age = 24 and name is null
+        userList = userMapper.selectList(queryWrapper2);
+        userList.forEach(System.out::println);
 
-		QueryWrapper<User> queryWrapper3 = Wrappers.query();
-		// where age = 24
-		queryWrapper3.allEq(params, false); // filter condition which column value is null when false
-		userList = userMapper.selectList(queryWrapper3);
-		userList.forEach(System.out::println);
+        QueryWrapper<User> queryWrapper3 = Wrappers.query();
+        // where age = 24
+        queryWrapper3.allEq(params, false); // filter condition which column value is null when false
+        userList = userMapper.selectList(queryWrapper3);
+        userList.forEach(System.out::println);
 
-		QueryWrapper<User> queryWrapper4 = Wrappers.query();
-		queryWrapper4.allEq(params, true);
-		// where age = 24 and name is null
-		userList = userMapper.selectList(queryWrapper4);
-		userList.forEach(System.out::println);
-	}
+        QueryWrapper<User> queryWrapper4 = Wrappers.query();
+        queryWrapper4.allEq(params, true);
+        // where age = 24 and name is null
+        userList = userMapper.selectList(queryWrapper4);
+        userList.forEach(System.out::println);
+    }
 
-	@Test
-	void testAbstractWrapper() {
-		QueryWrapper<User> queryWrapper = Wrappers.query();
-		queryWrapper.eq("age", 24);
+    @Test
+    void testAbstractWrapper() {
+        QueryWrapper<User> queryWrapper = Wrappers.query();
+        queryWrapper.eq("age", 24);
 
 		/*
 		queryWrapper.ne("name", null);
@@ -119,26 +119,26 @@ class QueryWrapperTest {
 		queryWrapper.notExists("select id from table where age = 24");
 		*/
 
-		List<User> userList = userMapper.selectList(queryWrapper);
-		userList.forEach(System.out::println);
-	}
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 
-	@Test
-	void testQueryWrapper() {
-		QueryWrapper<User> queryWrapper = Wrappers.query();
-		// select id, name, age
-		queryWrapper.select("id", "name", "age");
-		// queryWrapper.select(i -> i.getProperty().startsWith("n"));
+    @Test
+    void testQueryWrapper() {
+        QueryWrapper<User> queryWrapper = Wrappers.query();
+        // select id, name, age
+        queryWrapper.select("id", "name", "age");
+        // queryWrapper.select(i -> i.getProperty().startsWith("n"));
 
-		List<User> userList = userMapper.selectList(queryWrapper);
-		userList.forEach(System.out::println);
-	}
+        List<User> userList = userMapper.selectList(queryWrapper);
+        userList.forEach(System.out::println);
+    }
 
-	@Test
-	void testUpdateWrapper() {
-		UpdateWrapper<User> updateWrapper = Wrappers.update();
-		updateWrapper.eq("id", 1);
-		updateWrapper.set("name", "yinli");
-		userMapper.update(null, updateWrapper);
-	}
+    @Test
+    void testUpdateWrapper() {
+        UpdateWrapper<User> updateWrapper = Wrappers.update();
+        updateWrapper.eq("id", 1);
+        updateWrapper.set("name", "yinli");
+        userMapper.update(null, updateWrapper);
+    }
 }

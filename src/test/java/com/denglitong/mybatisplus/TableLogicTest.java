@@ -41,4 +41,10 @@ class TableLogicTest {
         userList = userMapper.selectList(null);
         Assertions.assertEquals(1, userList.size());
     }
+
+    @Test
+    void testSelectById() {
+        // is_deleted = 1
+        Assertions.assertNull(userMapper.selectById(2));
+    }
 }
