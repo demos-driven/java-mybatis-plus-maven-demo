@@ -1,8 +1,12 @@
 package com.denglitong.mybatisplus.quickstart.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.io.Serializable;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.denglitong.mybatisplus.quickstart.enums.GradeEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -41,5 +45,10 @@ public class User implements Serializable {
      */
     private String email;
 
-
+    @TableField("is_deleted")
+    @TableLogic
+    /**
+     * 删除标识
+     */
+    private Boolean deleted;
 }
